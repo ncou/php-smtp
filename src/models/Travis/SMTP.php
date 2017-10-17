@@ -15,8 +15,8 @@ class SMTP {
     protected $port;
     protected $secure; // null, 'ssl', or 'tls'
     protected $auth; // true if authorization required
-    protected $user;
-    protected $pass;
+    protected $username;
+    protected $password;
 
     // email
     protected $to = [];
@@ -41,8 +41,8 @@ class SMTP {
         // set connection vars
         $this->host = $config['host'];
         $this->port = $config['port'];
-        $this->user = $config['username'];
-        $this->pass = $config['password'];
+        $this->username = $config['username'];
+        $this->password = $config['password'];
         $this->auth = $config['auth'];
         $this->secure = $config['secure'];
         
@@ -213,13 +213,13 @@ class SMTP {
             if ($this->code() !== 334) return false;
 
             // request
-            $this->request(base64_encode($this->user).$this->newline);
+            $this->request(base64_encode($this->username).$this->newline);
 
             // response
             if ($this->code() !== 334) return false;
 
             // request
-            $this->request(base64_encode($this->pass).$this->newline);
+            $this->request(base64_encode($this->password).$this->newline);
 
             // response
             if ($this->code() !== 235) return false;
