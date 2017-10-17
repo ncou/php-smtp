@@ -10,25 +10,9 @@ Normal install via Composer.
 
 Everytime you make a new SMTP object, you have to pass a config array.  This is how we make the package framework agnostic.  The included config file is your reference for the required fields and values.
 
-One method is to pass the array directly from the file:
-
 ```php
 $mail = new Travis\SMTP(require __DIR__ . '/path/to/config.php');
 ```
-
-Another method is to use Laravel to pass a config after manually copying the file to ``app/config/smtp.php``:
-
-```php
-$mail = new Travis\SMTP(Config::get('smtp'));
-```
-
-Note that your config includes multiple connections, and you can choose which one to use when you forge the object:
-
-```php
-$mail = new Travis\SMTP($config, 'amazon');
-```
-
-You can also set a default connection in the config array.
 
 ## Usage
 
