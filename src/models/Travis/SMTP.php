@@ -1,6 +1,6 @@
 <?php
 
-namespace Travis;
+//namespace Travis;
 
 class SMTP {
 
@@ -39,27 +39,21 @@ class SMTP {
     protected $encoding = '7bit';
     protected $wordwrap = 70;
 
-    public function __construct($config, $connection = null)
+    public function __construct($config)
     {
-        // set config
-        $this->config = $config;
-
-        // decide on a connection
-        $connection = $connection ? $this->config('connections.'.$connection) : $this->config('connections.'.$this->config('default'));
-
         // set connection vars
-        $this->host = $connection['host'];
-        $this->port = $connection['port'];
-        $this->secure = $connection['secure'];
-        $this->auth = $connection['auth'];
-        $this->user = $connection['user'];
-        $this->pass = $connection['pass'];
-
+        $this->host = $config['host'];
+        $this->port = $config['port'];
+        $this->user = $config['username'];
+        $this->pass = $config['password'];
+        $this->auth = $config['auth'];
+        $this->secure = $config['secure'];
+        
         // set debug mode
-        $this->debug_mode = $this->config('debug_mode');
+        $this->debug_mode = $config['debug_mode'];
 
         // set localhost
-        $this->localhost = $this->config('default');
+        $this->localhost = $config['localhost'];
     }
 
     public function from($email, $name = null)
@@ -486,8 +480,4 @@ class SMTP {
         return $content;
     }
 
-    private function config($coords, $default = null)
-    {
-        return ex($this->config, $coords, $default);
-    }
 }
