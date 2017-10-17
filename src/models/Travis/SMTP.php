@@ -1,11 +1,8 @@
 <?php
 
-//namespace Travis;
+namespace Travis;
 
 class SMTP {
-
-    // config
-    protected $config = [];
 
     // connection
     protected $connection;
