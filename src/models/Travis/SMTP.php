@@ -107,7 +107,6 @@ class SMTP {
     public function body($html)
     {
         $this->body = $html;
-        #$this->text = $this->normalize($html); // merge request was wrong to put this here
     }
 
     public function text($text)
